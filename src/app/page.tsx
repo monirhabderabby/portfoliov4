@@ -28,7 +28,11 @@ const Certificates = dynamic(
 );
 
 export default async function Home() {
-  const projects = await db.project.findMany();
+  const projects = await db.project.findMany({
+    orderBy: {
+      position: "asc",
+    },
+  });
   return (
     <section className="widthContainer">
       <PageTransition>

@@ -1,10 +1,12 @@
 // Package
+import { ClerkProvider } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import Head from "next/head";
 
 // CSS
 import NProgress from "@/components/animation/NProgress";
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,15 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-      </Head>
-      <body>
-        <NProgress />
-        <main className="min-h-screen w-full">{children}</main>
-        <SpeedInsights />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+        </Head>
+        <body>
+          <NProgress />
+          <Toaster />
+          <main className="min-h-screen w-full">{children}</main>
+          <SpeedInsights />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

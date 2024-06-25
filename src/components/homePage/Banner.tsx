@@ -116,7 +116,7 @@ const Banner = () => {
             variants={fadeIn("down", 0.5)}
             initial="hidden"
             whileInView={"show"}
-            className="hidden lg:flex flex-1"
+            className="hidden lg:flex flex-1  "
           >
             <Tooltip
               content="Assalamu Alaikum"

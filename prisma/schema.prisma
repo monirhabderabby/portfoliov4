@@ -23,6 +23,6 @@ model project {
   description   String
   images        String[]
   techs         String[]
-  visited       Int
+  visited       Int      @default(0)
   position      Int
 }

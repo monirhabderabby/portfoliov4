@@ -11,7 +11,7 @@ const PageTransition = dynamic(
 const Projects = async () => {
   const data = await db.project.findMany({
     orderBy: {
-      position: "desc",
+      position: "asc",
     },
   });
 
