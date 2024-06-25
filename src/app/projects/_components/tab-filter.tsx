@@ -23,7 +23,7 @@ const TabFilter: React.FC<TabFilterProps> = ({
     setValue(FilterValue);
   };
   return (
-    <div className="container flex gap-x-[20px] mx-auto">
+    <div className="container flex flex-wrap gap-[20px]">
       {filterOptions?.map(({ id, label, value }) => {
         return (
           <label
