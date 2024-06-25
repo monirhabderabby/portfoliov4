@@ -63,6 +63,11 @@ const ProjectEditForm = ({ initialData }: Props) => {
     },
   });
 
+  const initialTechsSelected = initialData.techs.map((tech) => ({
+    value: tech,
+    label: tech,
+  }));
+
   const { toast } = useToast();
 
   const { watch } = form;
@@ -203,6 +208,7 @@ const ProjectEditForm = ({ initialData }: Props) => {
                       onValuesSelect={(techs) => {
                         field.onChange(techs);
                       }}
+                      initialSelected={initialTechsSelected}
                     />
                   </FormControl>
                   <FormMessage />

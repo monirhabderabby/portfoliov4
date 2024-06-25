@@ -43,12 +43,18 @@ const FRAMEWORKS = [
 
 interface Props {
   onValuesSelect: (values: string[]) => void;
+  initialSelected?: Framework[] | [];
 }
 
-export default function TechnologySelector({ onValuesSelect }: Props) {
+export default function TechnologySelector({
+  onValuesSelect,
+  initialSelected,
+}: Props) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<Framework[]>([FRAMEWORKS[1]]);
+  const [selected, setSelected] = React.useState<Framework[]>(
+    (initialSelected as Framework[]) || [FRAMEWORKS[1]]
+  );
   const [inputValue, setInputValue] = React.useState("");
 
   const handleUnselect = React.useCallback((framework: Framework) => {
