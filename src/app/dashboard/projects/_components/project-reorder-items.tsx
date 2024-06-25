@@ -9,6 +9,7 @@ import {
 } from "@hello-pangea/dnd";
 import { project } from "@prisma/client";
 import { Grip, Pencil } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -25,6 +26,7 @@ const ProjectReOrderItems = ({ items, onReorder }: Props) => {
   useEffect(() => {
     setProjects(items);
   }, [items]);
+  const router = useRouter();
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -93,7 +95,9 @@ const ProjectReOrderItems = ({ items, onReorder }: Props) => {
                       </Badge>
                       <Pencil
                         onClick={() => {
-                          // do some stuff
+                          router.replace(
+                            `/dashboard/projects/edit/${project.id}`
+                          );
                         }}
                         className="w-4 h-4 cursor-pointer hover:opacity-75 transition"
                       />

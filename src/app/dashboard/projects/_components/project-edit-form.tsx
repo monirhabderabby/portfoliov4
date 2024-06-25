@@ -1,6 +1,5 @@
 "use client";
 
-import { createProject } from "@/actions/project/project";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -29,29 +28,38 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import {
-  CreateProjectSchema,
-  CreateProjectSchemaType,
+  UpdateProjectSchema,
+  UpdateProjectSchemaType,
 } from "@/schema/project.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { project } from "@prisma/client";
+import { MoveLeft } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useMemo, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import TechnologySelector from "./technology-selector";
 
-const ProjectCreateForm = () => {
+interface Props {
+  initialData: project;
+}
+
+const ProjectEditForm = ({ initialData }: Props) => {
   const [isPending, startTransition] = useTransition();
-  const form = useForm<CreateProjectSchemaType>({
-    resolver: zodResolver(CreateProjectSchema),
+
+  const router = useRouter();
+  const form = useForm<UpdateProjectSchemaType>({
+    resolver: zodResolver(UpdateProjectSchema),
     defaultValues: {
-      project_type: "Full Stack Website",
-      project_name: "",
-      thumbnail_url: "",
-      description: "",
-      github_link: "",
-      live_link: "",
-      techs: [],
-      images: [],
+      project_type: initialData.project_type as string,
+      project_name: initialData.project_name || "",
+      thumbnail_url: initialData.thumbnail_url || "",
+      description: initialData.description || "",
+      github_link: initialData.github_link,
+      live_link: initialData.live_link,
+      techs: initialData.techs,
+      images: initialData.images,
     },
   });
 
@@ -64,31 +72,46 @@ const ProjectCreateForm = () => {
     []
   );
 
-  function onSubmit(values: CreateProjectSchemaType) {
+  function onSubmit(values: UpdateProjectSchemaType) {
     startTransition(() => {
-      createProject(values).then((res: any) => {
-        if (res?.error) {
-          toast({
-            variant: "destructive",
-            description: <p>{res.error.message}</p>,
-          });
-        } else if (res?.success) {
-          toast({
-            description: res.success,
-            variant: "default",
-          });
-          form.reset();
-        }
-      });
+      //   createProject(values).then((res: any) => {
+      //     if (res?.error) {
+      //       toast({
+      //         variant: "destructive",
+      //         description: <p>{res.error.message}</p>,
+      //       });
+      //     } else if (res?.success) {
+      //       toast({
+      //         description: res.success,
+      //         variant: "default",
+      //       });
+      //       form.reset();
+      //     }
+      //   });
     });
   }
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Project</CardTitle>
-        <CardDescription>
-          Great job, Add new project to showcase your skill 🤚
-        </CardDescription>
+        <section className="w-full flex justify-between items-center">
+          <div className="space-y-2">
+            <CardTitle>Project</CardTitle>
+            <CardDescription>
+              Great job, Edit project to showcase your skill ✏️
+            </CardDescription>
+          </div>
+          <div>
+            <Button
+              variant="link"
+              className="flex gap-x-2 group "
+              onClick={() => {
+                router.replace("/dashboard/projects");
+              }}
+            >
+              <MoveLeft className="h-4 w-4" /> Back Now
+            </Button>
+          </div>
+        </section>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -307,11 +330,11 @@ const ProjectCreateForm = () => {
           type="submit"
           onClick={form.handleSubmit(onSubmit)}
         >
-          Publish Now
+          Update Now
         </Button>
       </CardFooter>
     </Card>
   );
 };
 
-export default ProjectCreateForm;
+export default ProjectEditForm;

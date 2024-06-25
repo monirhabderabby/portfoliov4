@@ -1,4 +1,10 @@
-import ProjectCreateForm from "../_components/project-create-form";
+import dynamic from "next/dynamic";
+const ProjectCreateForm = dynamic(
+  () => import("../_components/project-create-form"),
+  {
+    ssr: false,
+  }
+);
 
 const Page = () => {
   return (
