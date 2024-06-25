@@ -5,9 +5,14 @@ import { db } from "@/lib/db";
 import { project } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import ProjectReOrderList from "./_components/project-reorder-list";
 
 const Page = async () => {
-  const projects = await db.project.findMany();
+  const projects = await db.project.findMany({
+    orderBy: {
+      position: "asc",
+    },
+  });
   return (
     <div>
       <div className="border-b bg-card">
@@ -51,6 +56,9 @@ const Page = async () => {
           </Card>
         ))}
       </section>
+
+      {/* render reorder projects */}
+      <ProjectReOrderList projects={projects} />
     </div>
   );
 };
