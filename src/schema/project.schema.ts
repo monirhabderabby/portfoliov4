@@ -16,6 +16,7 @@ export const CreateProjectSchema = z.object({
 export type CreateProjectSchemaType = z.infer<typeof CreateProjectSchema>;
 
 export const UpdateProjectSchema = z.object({
+  id: z.string(),
   project_type: z.string(),
   project_name: z.string().min(4, {
     message: "Project name must be 4 characters",

@@ -1,5 +1,6 @@
 "use client";
 
+import { updateProject } from "@/actions/project/project";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,7 +38,7 @@ import { MoveLeft } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useMemo, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import TechnologySelector from "./technology-selector";
 
@@ -47,11 +48,13 @@ interface Props {
 
 const ProjectEditForm = ({ initialData }: Props) => {
   const [isPending, startTransition] = useTransition();
+  const [isThumbnailEditing, setThumbnailEditing] = useState(false);
 
   const router = useRouter();
   const form = useForm<UpdateProjectSchemaType>({
     resolver: zodResolver(UpdateProjectSchema),
     defaultValues: {
+      id: initialData.id,
       project_type: initialData.project_type as string,
       project_name: initialData.project_name || "",
       thumbnail_url: initialData.thumbnail_url || "",
@@ -79,20 +82,22 @@ const ProjectEditForm = ({ initialData }: Props) => {
 
   function onSubmit(values: UpdateProjectSchemaType) {
     startTransition(() => {
-      //   createProject(values).then((res: any) => {
-      //     if (res?.error) {
-      //       toast({
-      //         variant: "destructive",
-      //         description: <p>{res.error.message}</p>,
-      //       });
-      //     } else if (res?.success) {
-      //       toast({
-      //         description: res.success,
-      //         variant: "default",
-      //       });
-      //       form.reset();
-      //     }
-      //   });
+      console.log(values);
+      updateProject(values).then((res: any) => {
+        if (res?.error) {
+          toast({
+            variant: "destructive",
+            description: <p>{res.error.message}</p>,
+          });
+        } else if (res?.success) {
+          toast({
+            description: res.success,
+            variant: "default",
+          });
+          form.reset();
+          router.replace(`/projects/${initialData.id}`);
+        }
+      });
     });
   }
   return (
@@ -225,8 +230,9 @@ const ProjectEditForm = ({ initialData }: Props) => {
                       <FormLabel>Thumbnail Image</FormLabel>
                       {watch("thumbnail_url") && (
                         <Button
+                          type="button"
                           onClick={() => {
-                            form.resetField("thumbnail_url");
+                            setThumbnailEditing(true);
                           }}
                           variant="link"
                           size="sm"
@@ -236,7 +242,15 @@ const ProjectEditForm = ({ initialData }: Props) => {
                       )}
                     </div>
                     <FormControl>
-                      {watch("thumbnail_url") ? (
+                      {isThumbnailEditing ? (
+                        <FileUpload
+                          endpoint="thumbnail"
+                          onChange={(data) => {
+                            field.onChange(data[0].url);
+                            setThumbnailEditing(false);
+                          }}
+                        />
+                      ) : (
                         <div className="h-[286px] aspect-video border-dotted border-[2px] rounded-md p-2 w-full ">
                           <div className="relative h-full w-full">
                             <Image
@@ -247,11 +261,6 @@ const ProjectEditForm = ({ initialData }: Props) => {
                             />
                           </div>
                         </div>
-                      ) : (
-                        <FileUpload
-                          endpoint="thumbnail"
-                          onChange={(data) => field.onChange(data[0].url)}
-                        />
                       )}
                     </FormControl>
                     <FormMessage />
