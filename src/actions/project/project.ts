@@ -7,6 +7,7 @@ import {
   UpdateProjectSchema,
   UpdateProjectSchemaType,
 } from "@/schema/project.schema";
+import { auth } from "@clerk/nextjs/server";
 
 export const createProject = async (data: CreateProjectSchemaType) => {
   const parsedBody = CreateProjectSchema.safeParse(data);
@@ -77,6 +78,32 @@ export const updateProject = async (data: UpdateProjectSchemaType) => {
         message: error,
         name: "PROJECT_UPDATE_ERROR",
       },
+    };
+  }
+};
+
+export const deleteProjectAction = async (id: string) => {
+  const { userId } = auth();
+
+  if (userId !== process.env.ADMIN_ID) {
+    return {
+      error: "You are not authorized to delete this project",
+    };
+  }
+
+  try {
+    await db.project.delete({
+      where: {
+        id: id,
+      },
+    });
+    return {
+      success: "Project deleted successfully 🎉",
+    };
+  } catch (error: any) {
+    console.log("PROJECT_DELETE_ERROR");
+    return {
+      error: error.message,
     };
   }
 };

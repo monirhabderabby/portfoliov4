@@ -1,6 +1,7 @@
 "use client";
 
-import { updateProject } from "@/actions/project/project";
+import { deleteProjectAction, updateProject } from "@/actions/project/project";
+import ConfirmModal from "@/components/modal/confirm-modal";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -34,7 +35,7 @@ import {
 } from "@/schema/project.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { project } from "@prisma/client";
-import { MoveLeft } from "lucide-react";
+import { MoveLeft, Trash } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -100,6 +101,26 @@ const ProjectEditForm = ({ initialData }: Props) => {
       });
     });
   }
+
+  function deleteProject() {
+    startTransition(() => {
+      deleteProjectAction(initialData.id as string).then((res: any) => {
+        if (res?.error) {
+          toast({
+            variant: "destructive",
+            description: <p>{res.error.message}</p>,
+          });
+          return;
+        } else if (res?.success) {
+          toast({
+            description: res.success,
+            variant: "default",
+          });
+          router.replace("/dashboard/projects");
+        }
+      });
+    });
+  }
   return (
     <Card>
       <CardHeader>
@@ -110,7 +131,7 @@ const ProjectEditForm = ({ initialData }: Props) => {
               Great job, Edit project to showcase your skill ✏️
             </CardDescription>
           </div>
-          <div>
+          <div className="flex items-center gap-2">
             <Button
               variant="link"
               className="flex gap-x-2 group "
@@ -120,6 +141,11 @@ const ProjectEditForm = ({ initialData }: Props) => {
             >
               <MoveLeft className="h-4 w-4" /> Back Now
             </Button>
+            <ConfirmModal onConfirm={deleteProject}>
+              <Button size="sm" variant="destructive" disabled={isPending}>
+                <Trash className="h-4 w-4" />
+              </Button>
+            </ConfirmModal>
           </div>
         </section>
       </CardHeader>
