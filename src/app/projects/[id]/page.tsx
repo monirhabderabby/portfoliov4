@@ -29,6 +29,17 @@ const ProjectDetailes = async ({ params }: { params: { id: string } }) => {
     },
   });
 
+  await db.project.update({
+    where: {
+      id: id,
+    },
+    data: {
+      visited: {
+        increment: 1,
+      },
+    },
+  });
+
   const { description, live_link, techs, images, github_link } = data || {};
 
   return (
