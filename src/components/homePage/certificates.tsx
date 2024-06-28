@@ -34,37 +34,35 @@ const Certificates = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] gap-y-[40px] lg:gap-y-[60px] mt-[50px]">
-        {certificatesData
-          ?.slice(0, currentCertificate)
-          ?.map(({ id, certificate, name }) => {
-            return (
-              <Animate key={id} direction="up" delay={0.2}>
-                <Tooltip
-                  content={name}
-                  animate={{
-                    mount: { scale: 1, y: 0 },
-                    unmount: { scale: 0, y: 25 },
-                  }}
-                  placement="bottom"
-                >
-                  <div className="certificate">
-                    <Image
-                      width={0}
-                      height={0}
-                      style={{
-                        width: "80%",
-                        height: "80%",
-                      }}
-                      src={certificate}
-                      alt="certificate"
-                      className="hover:scale-110 duration-300 blur-[.6px] hover:blur-0 rounded-md"
-                      loading="lazy"
-                    />
-                  </div>
-                </Tooltip>
-              </Animate>
-            );
-          })}
+        {certificatesData?.map(({ id, certificate, name }) => {
+          return (
+            <Animate key={id} direction="up" delay={0.2}>
+              <Tooltip
+                content={name}
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+                placement="bottom"
+              >
+                <div className="certificate">
+                  <Image
+                    width={0}
+                    height={0}
+                    style={{
+                      width: "80%",
+                      height: "80%",
+                    }}
+                    src={certificate}
+                    alt="certificate"
+                    className="hover:scale-110 duration-300 blur-[.6px] hover:blur-0 rounded-md"
+                    loading="lazy"
+                  />
+                </div>
+              </Tooltip>
+            </Animate>
+          );
+        })}
       </div>
 
       <section className="h-[100px] w-full relative">
@@ -90,20 +88,6 @@ const Certificates = () => {
               );
             })}
         </div>
-        {isLoadMoreActive() && (
-          <div
-            className="absolute top-[50%] left-[50%]"
-            style={{ transform: "translate(-50%, -50%)" }}
-          >
-            <button
-              className="gradient hover:shadow-md duration-150 btn-sm md:h-[40px] md:px-10 rounded-md"
-              style={{ animation: "fade-out" }}
-              onClick={onLoadMore}
-            >
-              Load More
-            </button>
-          </div>
-        )}
       </section>
     </section>
   );
