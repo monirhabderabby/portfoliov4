@@ -65,6 +65,7 @@ const ProjectCreateForm = () => {
   );
 
   function onSubmit(values: CreateProjectSchemaType) {
+    console.log(values);
     startTransition(() => {
       createProject(values).then((res: any) => {
         if (res?.error) {
@@ -178,7 +179,7 @@ const ProjectCreateForm = () => {
                   <FormControl>
                     <TechnologySelector
                       onValuesSelect={(techs) => {
-                        field.onChange(techs);
+                        form.setValue("techs", techs);
                       }}
                     />
                   </FormControl>
