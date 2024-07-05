@@ -7,7 +7,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <motion.section
-      className="py-8 bg-transparent"
+      className=" bg-transparent  flex items-center  h-[80px]"
       initial={{
         opacity: 0,
       }}
@@ -22,7 +22,7 @@ const Header = () => {
         opacity: 0,
       }}
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto ">
         <div className="flex justify-between items-center">
           <Link href="/" className="z-50">
             <div className="flex flex-col items-start group">

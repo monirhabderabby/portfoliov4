@@ -27,7 +27,7 @@ const BannerV2 = () => {
     }),
   };
   return (
-    <div className="min-h-[calc(100vh-130px)] w-full flex justify-center items-center relative">
+    <div className="min-h-[calc(100vh-80px)] w-full flex justify-center items-center relative ">
       <Image
         src="/images/hero.svg"
         alt="Hero"
