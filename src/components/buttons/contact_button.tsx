@@ -1,14 +1,16 @@
 import Link from "next/link";
 
-interface ContactBtnProps {}
+interface ContactBtnProps {
+  text?: string;
+}
 
-const ContactBtn: React.FC<ContactBtnProps> = () => {
+const ContactBtn: React.FC<ContactBtnProps> = ({ text }) => {
   return (
     <Link
       href="/contact"
       className="btn btn-sm lg:btn-lg flex items-center cursor-pointer"
     >
-      Contact me
+      {text ? text : "Contact me"}
     </Link>
   );
 };

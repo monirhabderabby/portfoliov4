@@ -19,7 +19,7 @@ const PageTransition = dynamic(
 const Header = dynamic(() => import("@/components/homePage/Header"), {
   ssr: false,
 });
-const Banner = dynamic(() => import("@/components/homePage/Banner"), {
+const Banner = dynamic(() => import("@/components/homePage/banner-v2"), {
   ssr: false,
 });
 const Certificates = dynamic(
