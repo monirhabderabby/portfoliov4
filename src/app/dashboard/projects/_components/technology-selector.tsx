@@ -93,7 +93,7 @@ export default function TechnologySelector({
     });
 
     onValuesSelect(technologies);
-  }, [selected]);
+  }, [selected, onValuesSelect]);
 
   return (
     <Command
