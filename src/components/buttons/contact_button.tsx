@@ -8,7 +8,7 @@ const ContactBtn: React.FC<ContactBtnProps> = ({ text }) => {
   return (
     <Link
       href="/contact"
-      className="btn btn-sm lg:btn-lg flex items-center cursor-pointer"
+      className="btn btn-sm flex items-center cursor-pointer"
     >
       {text ? text : "Contact me"}
     </Link>

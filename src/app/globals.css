@@ -82,7 +82,7 @@ body {
     @apply rounded-full z-20 font-rajdhani text-white font-medium;
   }
   .btn-sm {
-    @apply h-[48px] px-6 text-sm;
+    @apply h-[42px] px-6 text-sm;
   }
   .btn-lg {
     @apply h-[56px] px-10 text-base;

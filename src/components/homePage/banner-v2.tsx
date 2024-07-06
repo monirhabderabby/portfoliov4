@@ -140,7 +140,7 @@ const BannerV2 = () => {
                   href={href}
                   target={target}
                 >
-                  <Icon className="hover:text-white text-gray-700 text-xl hover:scale-110  transition-all duration-500" />
+                  <Icon className="hover:text-white text-gray-500 text-xl hover:scale-110  transition-all duration-500" />
                 </motion.a>
               ))}
             </div>
