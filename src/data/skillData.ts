@@ -14,6 +14,7 @@ import prisma from "../../public/skills/prisma.svg";
 import react from "../../public/skills/react.svg";
 import tailwind from "../../public/skills/tailwind.svg";
 import typescript from "../../public/skills/typescript.svg";
+import vitejs from "../../public/skills/vitejs.svg";
 
 interface skillDataType {
   id: Number;
@@ -101,5 +102,10 @@ export const skillsData: skillDataType[] = [
     id: Math.floor(Math.random() * 9999),
     name: "Prisma",
     image: prisma,
+  },
+  {
+    id: Math.floor(Math.random() * 9999),
+    name: "Vite JS",
+    image: vitejs,
   },
 ];
