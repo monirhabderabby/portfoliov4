@@ -14,7 +14,7 @@ const Animate: React.FC<AnimateProps> = ({ children, direction, delay }) => {
       variants={fadeIn(direction, delay)}
       initial="hidden"
       whileInView={"show"}
-      viewport={{ once: false, amount: 0.7 }}
+      viewport={{ once: true, amount: 0.7 }}
     >
       {children}
     </motion.div>

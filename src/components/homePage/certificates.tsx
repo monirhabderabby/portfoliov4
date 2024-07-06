@@ -23,7 +23,7 @@ const Certificates = () => {
     setNext((prev) => prev + 3);
   };
   return (
-    <section className="container mx-auto">
+    <section className="container mx-auto my-12 lg:my-24 min-h-screen">
       <div className="flex justify-center flex-col items-center">
         <h2 className="h2 leading-tight font-aldrich text-accent text-center">
           Achievements

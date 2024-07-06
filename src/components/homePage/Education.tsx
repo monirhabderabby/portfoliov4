@@ -9,7 +9,7 @@ const GlowCard = dynamic(() => import("@/components/cards/glow-card"));
 
 const Education = () => {
   return (
-    <div id="education" className="relative z-50  my-12 lg:my-24 ">
+    <div id="education" className="relative z-50  my-12 lg:my-24 min-h-screen">
       <div className="flex justify-center flex-col items-center">
         <h2 className="h2 leading-tight font-aldrich text-accent text-center">
           Education
