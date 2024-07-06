@@ -39,6 +39,10 @@ const FRAMEWORKS = [
     value: "CSS",
     label: "CSS",
   },
+  {
+    value: "Vite JS",
+    label: "Vite",
+  },
 ] satisfies Framework[];
 
 interface Props {
