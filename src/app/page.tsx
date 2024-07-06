@@ -4,7 +4,6 @@ import Education from "@/components/homePage/Education";
 import MyProjects from "@/components/homePage/MyProjects";
 import Skill from "@/components/homePage/Skills";
 import ContactBody from "@/components/homePage/contact-body";
-import ExperiencesV2 from "@/components/homePage/experiences-v2";
 
 import { db } from "@/lib/db";
 import dynamic from "next/dynamic";
@@ -26,6 +25,9 @@ const Certificates = dynamic(
   () => import("@/components/homePage/certificates"),
   { ssr: false }
 );
+const ExperiencesV2 = dynamic(
+  () => import("@/components/homePage/experiences-v2")
+);
 
 export default async function Home() {
   const projects = await db.project.findMany({
@@ -43,7 +45,6 @@ export default async function Home() {
         <MyProjects projects={projects} />
         <Education />
         <Certificates />
-        {/* <Experiences /> */}
         <ExperiencesV2 />
         <ContactBody />
       </PageTransition>
