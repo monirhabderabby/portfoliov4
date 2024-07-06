@@ -1,10 +1,10 @@
 // Packages
 import About from "@/components/homePage/About";
 import Education from "@/components/homePage/Education";
-import Experiences from "@/components/homePage/Experiences.";
 import MyProjects from "@/components/homePage/MyProjects";
 import Skill from "@/components/homePage/Skills";
 import ContactBody from "@/components/homePage/contact-body";
+import ExperiencesV2 from "@/components/homePage/experiences-v2";
 
 import { db } from "@/lib/db";
 import dynamic from "next/dynamic";
@@ -43,7 +43,8 @@ export default async function Home() {
         <MyProjects projects={projects} />
         <Education />
         <Certificates />
-        <Experiences />
+        {/* <Experiences /> */}
+        <ExperiencesV2 />
         <ContactBody />
       </PageTransition>
     </section>
