@@ -19,7 +19,7 @@ const BannerV2 = () => {
       y: 0,
       scale: 1,
       transition: {
-        delay: 0.9 * index,
+        delay: 0.5 * index,
         duration: 0.5,
         type: "tween",
         stiffness: 125,
