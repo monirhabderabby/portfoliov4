@@ -1,4 +1,5 @@
 import { BriefcaseBusiness } from "lucide-react";
+import { AiOutlineCode } from "react-icons/ai";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export const socialData = [
@@ -19,6 +20,12 @@ export const socialData = [
     href: "https://github.com/monirhabderabby",
     target: "_github",
     icon: FaGithub,
+  },
+  {
+    id: 4,
+    href: "https://leetcode.com/u/monirhrabby",
+    target: "_leetcode",
+    icon: AiOutlineCode,
   },
 ];
 
